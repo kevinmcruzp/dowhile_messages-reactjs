@@ -1,13 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from './App'
+import { AuthProvider } from './contexts/auth'
 
 import "./style/global.css"
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+
+      <App />
+
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
