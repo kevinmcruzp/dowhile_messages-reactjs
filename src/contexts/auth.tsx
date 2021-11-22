@@ -51,6 +51,21 @@ export function AuthProvider(props: AuthProvider) {
 
   }
 
+  //Info do usuario logado
+  useEffect(() => {
+    const token = localStorage.getItem('@dowhile:token')
+    if (token) {
+
+      //Mandar tokem pelo header da req
+      api.defaults.headers.common.authorization = `Bearer ${token}`
+
+      api.get('profile').then(response => {
+        setUser(response.data)
+      })
+    }
+  }, [])
+
+  //Obter tokem e info do usuario
   useEffect(() => {
     const url = window.location.href
     const hasGithubCode = url.includes('?code=')
@@ -66,7 +81,7 @@ export function AuthProvider(props: AuthProvider) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ signInUrl, user}}>
+    <AuthContext.Provider value={{ signInUrl, user }}>
       {props.children}
     </AuthContext.Provider>
   )
