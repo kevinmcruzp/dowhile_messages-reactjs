@@ -16,7 +16,7 @@ type Message = {
 
 const messagesQueue: Message[] = [];
 
-const socket = io('http://localhost:4000')
+const socket = io('https://dowhile-messages-nodejs-kevinmcruzp.vercel.app')
 socket.on('new_message', (newMessage: Message) => {
   messagesQueue.push(newMessage)
 })
@@ -51,7 +51,6 @@ export function MessageList() {
       <ul className={styles.messageList}>
         {
           messages.map((message) => {
-
             return (
               <li key={message.id} className={styles.message}>
                 <p className={styles.messageContent}>
@@ -65,12 +64,8 @@ export function MessageList() {
                 </div>
               </li>
             )
-
           })
         }
-
-
-
       </ul>
     </div>
   )
