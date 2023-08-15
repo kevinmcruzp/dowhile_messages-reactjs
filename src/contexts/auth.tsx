@@ -38,12 +38,12 @@ export function AuthProvider(props: AuthProvider) {
   const [user, setUser] = useState<User | null>(null)
 
   const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=c573879f9d3bdd4f445b`
-
   async function signIn(githubCode: string) {
     const response = await api.post<AuthResponse>('authenticate', {
       code: githubCode,
     })
-
+    
+    console.log(response.data)
     const { token, user } = response.data;
 
     localStorage.setItem('@dowhile:token', token)

@@ -51,7 +51,6 @@ export function MessageList() {
       <ul className={styles.messageList}>
         {
           messages.map((message) => {
-            console.log(message)
 
             return (
               <li key={message.id} className={styles.message}>
