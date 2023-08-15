@@ -4,7 +4,11 @@ import { AuthContext } from "../../contexts/auth";
 import { api } from "../../service/api";
 import styles from "./styles.module.scss"
 
-export function SendMessageForm() {
+type SendMessageFormProps = {
+  setCurrentMessage: (message: string) => void;
+}
+
+export function SendMessageForm( { setCurrentMessage }: SendMessageFormProps) {
   const { user, signOut } = useContext(AuthContext);
   const [message, setMessage] = useState('');
 
@@ -15,10 +19,11 @@ export function SendMessageForm() {
     }
 
     await api.post('messages', { message })
+    
+    setCurrentMessage(message);
 
     setMessage("");
   }
-
 
   return (
     <div className={styles.sendMessageFormWrapper}>
